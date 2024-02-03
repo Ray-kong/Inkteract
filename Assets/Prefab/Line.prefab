@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3078757405195941338}
-  - component: {fileID: 269990732470529128}
+  - component: {fileID: 3307518981741174508}
   m_Layer: 0
   m_Name: Collider
   m_TagString: Ground
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4640580491042258142}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!68 &269990732470529128
+--- !u!68 &3307518981741174508
 EdgeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -67,8 +67,8 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: 3.1088624, y: 0}
-  - {x: -0.14687157, y: 0}
+  - {x: -0.5, y: 0}
+  - {x: 0.5, y: 0}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
@@ -222,4 +222,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _renderer: {fileID: 9155267152259222459}
-  _collider: {fileID: 269990732470529128}
+  _collider: {fileID: 3307518981741174508}
