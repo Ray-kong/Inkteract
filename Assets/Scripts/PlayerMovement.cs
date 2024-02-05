@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float _speed = 5f;
-    [SerializeField] private float _jumpForce = 5f;
+    [SerializeField] private float speed = 5f;
+    [SerializeField] private float jumpForce = 5f;
 
     private Rigidbody2D _body;
     private bool _canJump = true;
@@ -15,12 +15,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        _body.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * _speed, _body.velocity.y);
+        _body.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * speed, _body.velocity.y);
         
         //TODO: improve movement. make jump less floaty and make it smoother
         if (Input.GetKey(KeyCode.Space) && _canJump)
         {
-            _body.velocity = new Vector2(_body.velocity.x, _jumpForce);
+            _body.velocity = new Vector2(_body.velocity.x, jumpForce);
             _canJump = false;
         }
     }
