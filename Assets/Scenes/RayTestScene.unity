@@ -284,8 +284,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e4fc1374bb6e5d4199f0fc7132a19f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 5
-  _jumpForce: 7
+  speed: 5
+  jumpForce: 5
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -534,7 +534,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95cf86a80dda3bf4ca3e98365798bd81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _linePrefab: {fileID: 4595509332049074346, guid: a94b0348ddc6d1f419802053d26140b4, type: 3}
+  linePrefab: {fileID: 4595509332049074346, guid: a94b0348ddc6d1f419802053d26140b4, type: 3}
 --- !u!4 &1940987602
 Transform:
   m_ObjectHideFlags: 0
