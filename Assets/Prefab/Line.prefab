@@ -221,5 +221,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a61e6ba522074594b8dec5cc2c75ca39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _renderer: {fileID: 9155267152259222459}
-  _collider: {fileID: 3307518981741174508}
+  renderer: {fileID: 9155267152259222459}
+  collider: {fileID: 3307518981741174508}

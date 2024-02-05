@@ -27,7 +27,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // Assuming the ground has a specific tag, replace "Ground" with your ground tag
         if (collision.gameObject.CompareTag("Ground"))
         {
             _canJump = true;
