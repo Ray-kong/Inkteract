@@ -36,6 +36,10 @@ public class LaserMovement : MonoBehaviour
             }
             else
             {
+                if (hit.collider.CompareTag("Player"))
+                {
+                    Destroy(GameObject.FindGameObjectWithTag("Player"));
+                }
                 onSensor = false;
             }
             
