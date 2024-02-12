@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3078757405195941338}
-  - component: {fileID: 3307518981741174508}
+  - component: {fileID: 8979689584637952483}
   m_Layer: 0
   m_Name: Collider
   m_TagString: Ground
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4640580491042258142}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!68 &3307518981741174508
+--- !u!68 &8979689584637952483
 EdgeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -128,7 +128,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 0f687290b9df11043bd96d2ce45681cb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -157,8 +157,8 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.042146236
-        value: 0.4090914
+        time: 0.1
+        value: 0.1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -222,4 +222,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   renderer: {fileID: 9155267152259222459}
-  collider: {fileID: 3307518981741174508}
+  collider: {fileID: 8979689584637952483}
