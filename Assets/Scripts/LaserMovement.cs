@@ -18,7 +18,6 @@ public class LaserMovement : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up);
 
         lineRenderer.SetPosition(0, transform.position);
-        lineRenderer.SetPosition(1, hit.point);
 
         if (hit)
         {
@@ -31,7 +30,7 @@ public class LaserMovement : MonoBehaviour
                     // Laser hit an obstacle, perform desired action (e.g., stop the laser)
                     // You can add code here to handle the obstacle interaction
                     Debug.Log("Laser hit a sensor!");
-                    door.GetComponent<Animator>().SetTrigger("SensorHit");
+                    door.GetComponent<DoorController>().OpenDoor();
                 }
             }
             else
@@ -41,12 +40,14 @@ public class LaserMovement : MonoBehaviour
                     Destroy(GameObject.FindGameObjectWithTag("Player"));
                 }
                 onSensor = false;
+                door.GetComponent<DoorController>().CloseDoor();
             }
             
         } else
         {
             lineRenderer.SetPosition(1, transform.up * 100);
             onSensor = false;
+            door.GetComponent<DoorController>().CloseDoor();
         }
     }
 }
