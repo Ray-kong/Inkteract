@@ -14,14 +14,14 @@ public class LinesDrawer : MonoBehaviour {
     public float linePointsMinDistance;
     public float lineWidth;
     
-    
+    public float maxLineLength = 5.0f;
 
-    // Add a queue to hold lines
     private readonly Queue<Line> _linesQueue = new Queue<Line>();
-    public int maxLines = 5; // Maximum number of lines before we start erasing the old ones
+    public int maxLines = 5; 
 
     private Line _currentLine;
     private Camera _cam;
+    private float _currentLineLength;
 
     void Start() {
         _lineColor = gravityLineColor;
@@ -49,7 +49,8 @@ public class LinesDrawer : MonoBehaviour {
     #region Draw
     void BeginDraw() {
         _currentLine = Instantiate(linePrefab, this.transform).GetComponent<Line>();
-
+        _currentLineLength = 0f;
+        
         //Set line properties
         _currentLine.UsePhysics(false);
         _currentLine.SetLineColor(_lineColor);
@@ -67,15 +68,43 @@ public class LinesDrawer : MonoBehaviour {
     // Draw ----------------------------------------------------
     void Draw() {
         Vector2 mousePosition = _cam.ScreenToWorldPoint(Input.mousePosition);
-/* TODO: Fix Wrong Layer Error. most likely this is happening cause of  wrong parameter in Physics2D.CircleCast
+/* TODO: Fix no Draw Zone error. most likely this is happening cause of  wrong parameter in Physics2D.CircleCast
 
         RaycastHit2D hit = Physics2D.CircleCast(mousePosition, lineWidth / 3f, Vector2.zero, 1f, cantDrawOverLayer);
         if (hit) {
             Debug.Log($"Hit: {hit.collider.name}, Layer: {LayerMask.LayerToName(hit.collider.gameObject.layer)}");
             EndDraw();
         } else */ 
+        if (_currentLine.pointsCount > 0) {
+            Vector2 lastPoint = _currentLine.GetLastPoint();
+            float distanceToAdd = Vector2.Distance(lastPoint, mousePosition);
 
-            _currentLine.AddPoint(mousePosition);
+            // Instead of adding the point directly, interpolate if the distance is too large
+            if (distanceToAdd > linePointsMinDistance) {
+                // Calculate how many points you need to interpolate based on the minimum distance
+                int pointsToInterpolate = Mathf.FloorToInt(distanceToAdd / linePointsMinDistance);
+                for (int i = 1; i <= pointsToInterpolate; i++) {
+                    // Interpolate the points
+                    Vector2 interpolatedPoint = Vector2.Lerp(lastPoint, mousePosition, (float)i / pointsToInterpolate);
+
+                    // Add each interpolated point if it does not exceed the max line length
+                    if (_currentLineLength + Vector2.Distance(lastPoint, interpolatedPoint) > maxLineLength) {
+                        return; // Stop adding points if the max length is exceeded
+                    }
+
+                    // Update the last point and current line length
+                    lastPoint = interpolatedPoint;
+                    _currentLineLength += Vector2.Distance(_currentLine.GetLastPoint(), interpolatedPoint);
+
+                    _currentLine.AddPoint(interpolatedPoint);
+                }
+            }
+        } else {
+            // This is the first point, add it directly
+            if (_currentLineLength == 0) {
+                _currentLine.AddPoint(mousePosition);
+            }
+        }
     }
 
     // End Draw ------------------------------------------------
