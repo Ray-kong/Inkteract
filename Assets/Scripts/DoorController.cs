@@ -8,7 +8,7 @@ public class DoorController : MonoBehaviour
     public Vector3 openPosition;
     public float slideSpeed = 2.0f;
 
-    private bool isOpen = false;
+    public bool isOpen = false;
 
     private void Start()
     {
