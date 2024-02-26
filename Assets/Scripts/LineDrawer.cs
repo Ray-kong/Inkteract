@@ -79,15 +79,11 @@ public class LinesDrawer : MonoBehaviour {
             Vector2 lastPoint = _currentLine.GetLastPoint();
             float distanceToAdd = Vector2.Distance(lastPoint, mousePosition);
 
-            // Instead of adding the point directly, interpolate if the distance is too large
             if (distanceToAdd > linePointsMinDistance) {
-                // Calculate how many points you need to interpolate based on the minimum distance
                 int pointsToInterpolate = Mathf.FloorToInt(distanceToAdd / linePointsMinDistance);
                 for (int i = 1; i <= pointsToInterpolate; i++) {
-                    // Interpolate the points
                     Vector2 interpolatedPoint = Vector2.Lerp(lastPoint, mousePosition, (float)i / pointsToInterpolate);
 
-                    // Add each interpolated point if it does not exceed the max line length
                     if (_currentLineLength + Vector2.Distance(lastPoint, interpolatedPoint) > maxLineLength) {
                         return; // Stop adding points if the max length is exceeded
                     }
