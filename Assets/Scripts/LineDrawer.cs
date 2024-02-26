@@ -1,3 +1,4 @@
+using System.Collections.Generic; // Import this for using List and Queue
 using UnityEngine;
 
 public class LinesDrawer : MonoBehaviour {
@@ -6,53 +7,62 @@ public class LinesDrawer : MonoBehaviour {
     public LayerMask cantDrawOverLayer;
     private int _cantDrawOverLayerIndex;
 
-    [Space ( 30f )]
+    [Space (30f)]
     public Gradient gravityLineColor;
     public Gradient antiGravityLineColor;
     private Gradient _lineColor;
     public float linePointsMinDistance;
     public float lineWidth;
+    
+    
+
+    // Add a queue to hold lines
+    private readonly Queue<Line> _linesQueue = new Queue<Line>();
+    public int maxLines = 5; // Maximum number of lines before we start erasing the old ones
 
     private Line _currentLine;
-
     private Camera _cam;
 
-
-    void Start ( ) {
+    void Start() {
         _lineColor = gravityLineColor;
         _cam = Camera.main;
-        _cantDrawOverLayerIndex = LayerMask.NameToLayer ( "CantDrawOver" );
+        _cantDrawOverLayerIndex = LayerMask.NameToLayer("CantDrawOver");
     }
 
-    void Update ( ) {
+    void Update() {
         if (Input.GetKeyDown(KeyCode.LeftShift)) {
             _lineColor = _lineColor.Equals(gravityLineColor) ? antiGravityLineColor : gravityLineColor;
         }
         if (Input.GetMouseButtonDown(0)) {
-            BeginDraw ( );
+            BeginDraw();
         }
 
         if (_currentLine != null) {
-            Draw ( );
+            Draw();
         }
 
         if (Input.GetMouseButtonUp(0)) {
-            EndDraw ( );
+            EndDraw();
         }
     }
-
-    #region draw
     
-    // Begin Draw ----------------------------------------------
-    void BeginDraw ( ) {
-        _currentLine = Instantiate ( linePrefab, this.transform ).GetComponent <Line> ( );
+    #region Draw
+    void BeginDraw() {
+        _currentLine = Instantiate(linePrefab, this.transform).GetComponent<Line>();
 
         //Set line properties
-        _currentLine.UsePhysics ( false );
-        _currentLine.SetLineColor ( _lineColor );
-        _currentLine.SetPointsMinDistance ( linePointsMinDistance );
-        _currentLine.SetLineWidth ( lineWidth );
+        _currentLine.UsePhysics(false);
+        _currentLine.SetLineColor(_lineColor);
+        _currentLine.SetPointsMinDistance(linePointsMinDistance);
+        _currentLine.SetLineWidth(lineWidth);
 
+        // Check if we need to remove the oldest line
+        if (_linesQueue.Count >= maxLines) {
+            Line oldestLine = _linesQueue.Dequeue();
+            Destroy(oldestLine.gameObject);
+        }
+
+        _linesQueue.Enqueue(_currentLine);
     }
     // Draw ----------------------------------------------------
     void Draw() {
