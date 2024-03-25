@@ -4,12 +4,13 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float speed = 5f;
     [SerializeField] private float jumpForce = 5f;
+    [SerializeField] private AudioClip jumpSFX;
+    [SerializeField] private AudioClip landingSFX;
 
     private Rigidbody2D _body;
     private bool _canJump = true;
 
     private Animator _animator;
-    private bool _facingRight;
 
     private void Awake()
     {
@@ -40,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
         {
             _body.velocity = new Vector2(_body.velocity.x, jumpForce);
             _canJump = false;
+            //AudioSource.PlayClipAtPoint(jumpSFX, Camera.main.transform.position);
         }
     }
 
@@ -47,6 +49,10 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
+            if (!_canJump)
+            {
+                //AudioSource.PlayClipAtPoint(landingSFX, Camera.main.transform.position);
+            }
             _canJump = true;
         }
     }
