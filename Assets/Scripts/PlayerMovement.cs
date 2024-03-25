@@ -8,14 +8,32 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D _body;
     private bool _canJump = true;
 
+    private Animator _animator;
+    private bool _facingRight;
+
     private void Awake()
     {
         _body = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
     }
 
     private void Update()
     {
         _body.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * speed, _body.velocity.y);
+        if (Input.GetAxisRaw("Horizontal") < 0)
+        {
+            _animator.SetInteger("animState", 1);
+            gameObject.transform.rotation = Quaternion.Euler(0, 180, 0);
+        } 
+        else if (Input.GetAxisRaw("Horizontal") > 0)
+        {
+            _animator.SetInteger("animState", 1);
+            gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        else
+        {
+            _animator.SetInteger("animState", 0);
+        }
         
         //TODO: improve movement. make jump less floaty and make it smoother
         if (Input.GetKey(KeyCode.Space) && _canJump)
