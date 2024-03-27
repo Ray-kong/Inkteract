@@ -17,7 +17,7 @@ public class LaserMovement : MonoBehaviour
         // Check for obstacles in the path of the laser
         RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up);
 
-        lineRenderer.SetPosition(0, transform.position);
+        lineRenderer.SetPosition(0, transform.position + new Vector3(0,0.5f,0));
 
         if (hit)
         {
