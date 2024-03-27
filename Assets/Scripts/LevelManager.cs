@@ -6,16 +6,14 @@ public class LevelManager : MonoBehaviour
 {
     public float levelDuration = 10.0f; // Duration of the level
     public Text levelTimer; // UI Text to display the timer
-    public Text gameText; // UI Text for displaying game messages (Win/Lose)
     public Text scoreText; // UI Text to display the score
-    public AudioClip gameOverSound; // Sound to play on game over
-    public AudioClip gameWonSound; // Sound to play on level completion
+    //public AudioClip gameOverSound; // Sound to play on game over
+    //public AudioClip gameWonSound; // Sound to play on level completion
     public string nextLevel; // Name of the next level to load
     public Transform player; // Reference to the player object
     public float groundY = -10.0f; // Y position considered as 'ground' or 'out of bounds'
 
     private float _countDown;
-    private int _numCollectables;
     private bool _isGameOver;
     private int _score; // Keeps track of the score
 
@@ -26,34 +24,20 @@ public class LevelManager : MonoBehaviour
         _score = 0;
         SetTimerText();
         scoreText.text = "Score: 0"; // Initialize score text
-        gameText.gameObject.SetActive(false); // Hide game message text initially
     }
 
     void Update()
     {
         if (!_isGameOver)
         {
-            CollectableUpdate();
             UpdateTimer();
             CheckPlayerOutOfBounds();
         }
     }
     
-    void CollectableUpdate()
-    {
-        _numCollectables = GameObject.FindGameObjectsWithTag("Collectable").Length;
-        Debug.Log("collectables: " + _numCollectables);
-    }
-
     void UpdateTimer()
     {
-        if (_numCollectables == 0)
-        {
-            Debug.Log("Collectable is 0!");
-            LevelWon(); // If all collectables are collected, player wins the level
-        }
-        
-        else if (_countDown > 0.0f)
+        if (_countDown > 0.0f)
         {
             _countDown -= Time.deltaTime;
             SetTimerText();
@@ -77,7 +61,8 @@ public class LevelManager : MonoBehaviour
     {
         levelTimer.text = $"Time: {_countDown:f2}";
     }
-
+    
+    // call this on collectable collision
     public void AddScore(int points)
     {
         _score += points;
@@ -87,18 +72,14 @@ public class LevelManager : MonoBehaviour
     void LevelLost()
     {
         _isGameOver = true;
-        gameText.text = "You Lost!";
-        gameText.gameObject.SetActive(true);
-        PlaySound(gameOverSound);  
+        //PlaySound(gameOverSound);  
         Invoke(nameof(LoadCurrentLevel), 2);
     }
 
     void LevelWon()
     {
         _isGameOver = true;
-        gameText.text = "You Won!";
-        gameText.gameObject.SetActive(true);
-        PlaySound(gameWonSound); 
+        //PlaySound(gameWonSound); 
 
         if (!string.IsNullOrEmpty(nextLevel))
             Invoke(nameof(LoadNextLevel), 2);
@@ -106,6 +87,7 @@ public class LevelManager : MonoBehaviour
 
     void LoadNextLevel()
     {
+        // lwk this can be anything, not just the actual levels
         if (nextLevel.Equals("Level 4")) {
             return;
         }
@@ -119,7 +101,7 @@ public class LevelManager : MonoBehaviour
 
     void PlaySound(AudioClip clip)
     {
-        AudioSource.PlayClipAtPoint(clip, Camera.main.transform.position);
+        AudioSource.PlayClipAtPoint(clip, Camera.main!.transform.position);
     }
 
     // Call this method to trigger level completion from other scripts (e.g., when all objectives are met)
