@@ -20,28 +20,31 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        _body.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * speed, _body.velocity.y);
-        if (Input.GetAxisRaw("Horizontal") < 0)
+        if (!LevelManager.isGameOver)
         {
-            _animator.SetInteger("animState", 1);
-            gameObject.transform.rotation = Quaternion.Euler(0, 180, 0);
-        } 
-        else if (Input.GetAxisRaw("Horizontal") > 0)
-        {
-            _animator.SetInteger("animState", 1);
-            gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
-        }
-        else
-        {
-            _animator.SetInteger("animState", 0);
-        }
-        
-        //TODO: improve movement. make jump less floaty and make it smoother
-        if (Input.GetKey(KeyCode.Space) && _canJump)
-        {
-            _body.velocity = new Vector2(_body.velocity.x, jumpForce);
-            _canJump = false;
-            //AudioSource.PlayClipAtPoint(jumpSFX, Camera.main.transform.position);
+            _body.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * speed, _body.velocity.y);
+            if (Input.GetAxisRaw("Horizontal") < 0)
+            {
+                _animator.SetInteger("animState", 1);
+                gameObject.transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
+            else if (Input.GetAxisRaw("Horizontal") > 0)
+            {
+                _animator.SetInteger("animState", 1);
+                gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
+            else
+            {
+                _animator.SetInteger("animState", 0);
+            }
+
+            //TODO: improve movement. make jump less floaty and make it smoother
+            if (Input.GetKey(KeyCode.Space) && _canJump)
+            {
+                _body.velocity = new Vector2(_body.velocity.x, jumpForce);
+                _canJump = false;
+                //AudioSource.PlayClipAtPoint(jumpSFX, Camera.main.transform.position);
+            }
         }
     }
 
