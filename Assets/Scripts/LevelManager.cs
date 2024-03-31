@@ -10,25 +10,30 @@ public class LevelManager : MonoBehaviour
     //public AudioClip gameOverSound; // Sound to play on game over
     //public AudioClip gameWonSound; // Sound to play on level completion
     public string nextLevel; // Name of the next level to load
-    public Transform player; // Reference to the player object
+    public static Transform player; // Reference to the player object
     public float groundY = -10.0f; // Y position considered as 'ground' or 'out of bounds'
 
     private float _countDown;
-    private bool _isGameOver;
+    public static bool isGameOver;
     private int _score; // Keeps track of the score
 
     private void Start()
     {
         _countDown = levelDuration;
-        _isGameOver = false;
+        isGameOver = false;
         _score = 0;
         SetTimerText();
         scoreText.text = "Score: 0"; // Initialize score text
+
+        if (!player)
+        {
+            player = GameObject.FindGameObjectWithTag("Player").transform;
+        }
     }
 
     void Update()
     {
-        if (!_isGameOver)
+        if (!isGameOver)
         {
             UpdateTimer();
             CheckPlayerOutOfBounds();
@@ -42,7 +47,7 @@ public class LevelManager : MonoBehaviour
             _countDown -= Time.deltaTime;
             SetTimerText();
         }
-        else if (_countDown <= 0.0f && !_isGameOver)
+        else if (_countDown <= 0.0f && !isGameOver)
         {
             _countDown = 0.0f;
             LevelLost(); // If time runs out, player loses the level
@@ -71,14 +76,14 @@ public class LevelManager : MonoBehaviour
 
     void LevelLost()
     {
-        _isGameOver = true;
+        isGameOver = true;
         //PlaySound(gameOverSound);  
         Invoke(nameof(LoadCurrentLevel), 2);
     }
 
-    void LevelWon()
+    public void LevelWon()
     {
-        _isGameOver = true;
+        isGameOver = true;
         //PlaySound(gameWonSound); 
 
         if (!string.IsNullOrEmpty(nextLevel))
@@ -107,11 +112,11 @@ public class LevelManager : MonoBehaviour
     // Call this method to trigger level completion from other scripts (e.g., when all objectives are met)
     public void TriggerLevelWon()
     {
-        if (!_isGameOver) LevelWon();
+        if (!isGameOver) LevelWon();
     }
     
     public void TriggerLevelLost()
     {
-        if (!_isGameOver) LevelLost();
+        if (!isGameOver) LevelLost();
     }
 }

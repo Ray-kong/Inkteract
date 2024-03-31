@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4421149353604676122}
   m_Layer: 0
   m_Name: LevelManager
-  m_TagString: Untagged
+  m_TagString: LevelManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,12 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047717e3b25234a418b68db4287f354d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelDuration: 10
+  levelDuration: 15
   levelTimer: {fileID: 0}
-  gameText: {fileID: 0}
   scoreText: {fileID: 0}
-  gameOverSound: {fileID: 0}
-  gameWonSound: {fileID: 0}
-  nextLevel: 
-  player: {fileID: 0}
+  nextLevel: Level 2
   groundY: -10

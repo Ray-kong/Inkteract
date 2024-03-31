@@ -9,6 +9,7 @@ TagManager:
   - LaserSensor
   - Box
   - Collectable
+  - LevelManager
   layers:
   - Default
   - TransparentFX
