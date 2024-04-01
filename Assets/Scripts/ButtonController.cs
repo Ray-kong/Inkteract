@@ -6,31 +6,37 @@ using UnityEngine;
 public class ButtonController : MonoBehaviour
 {
     public GameObject door;
+    public Sprite unpushedSprite;
+    public Sprite pushedSprite;
+    public GameObject[] doors; 
+
     private DoorController doorController;
-    public Vector3 pressedPosition;
-    private Vector3 initialPosition;
     [SerializeField]
     private int pushSpeed;
+    private SpriteRenderer spriteRenderer;
 
     private void Start()
     {
         doorController = door.GetComponent<DoorController>();
-        initialPosition = transform.position;
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
 
     private void Update()
     {
         if (doorController.isOpen)
-            transform.position = Vector3.Lerp(transform.position, pressedPosition, Time.deltaTime * pushSpeed);
+            spriteRenderer.sprite = pushedSprite;
         else
-            transform.position = Vector3.Lerp(transform.position, initialPosition, Time.deltaTime * pushSpeed);
+            spriteRenderer.sprite = unpushedSprite;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player") || other.CompareTag("Box"))
         {
-            doorController.OpenDoor();
+            foreach (GameObject door in doors)
+            {
+                door.GetComponent<DoorController>().OpenDoor();
+            }
         }
     }
 
@@ -38,7 +44,10 @@ public class ButtonController : MonoBehaviour
     {
         if (other.CompareTag("Player") || other.CompareTag("Box"))
         {
-            doorController.CloseDoor();
+            foreach (GameObject door in doors)
+            {
+                door.GetComponent<DoorController>().CloseDoor();
+            }
         }
     }
 }

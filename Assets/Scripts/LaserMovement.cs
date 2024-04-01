@@ -3,7 +3,7 @@ using UnityEngine;
 public class LaserMovement : MonoBehaviour
 {
     public LineRenderer lineRenderer;
-    public GameObject door;
+    public GameObject[] doors;
     bool onSensor;
 
     private void Start()
@@ -30,7 +30,10 @@ public class LaserMovement : MonoBehaviour
                     // Laser hit an obstacle, perform desired action (e.g., stop the laser)
                     // You can add code here to handle the obstacle interaction
                     Debug.Log("Laser hit a sensor!");
-                    door.GetComponent<DoorController>().OpenDoor();
+                    foreach (GameObject door in doors)
+                    {
+                        door.GetComponent<DoorController>().OpenDoor();
+                    }
                 }
             }
             else
@@ -40,14 +43,20 @@ public class LaserMovement : MonoBehaviour
                     Destroy(GameObject.FindGameObjectWithTag("Player"));
                 }
                 onSensor = false;
-                door.GetComponent<DoorController>().CloseDoor();
+                foreach (GameObject door in doors)
+                {
+                    door.GetComponent<DoorController>().CloseDoor();
+                }
             }
             
         } else
         {
             lineRenderer.SetPosition(1, transform.up * 100);
             onSensor = false;
-            door.GetComponent<DoorController>().CloseDoor();
+            foreach (GameObject door in doors)
+            {
+                door.GetComponent<DoorController>().CloseDoor();
+            }
         }
     }
 }

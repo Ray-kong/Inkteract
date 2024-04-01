@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class DoorController : MonoBehaviour
 {
-    public Vector3 initialPosition;
-    public Vector3 openPosition;
+    private Vector3 initialPosition;
     public float slideSpeed = 2.0f;
+    public float slideDistance;
+    public bool slideIsUpwards = true;
 
     public bool isOpen = false;
 
@@ -18,7 +19,14 @@ public class DoorController : MonoBehaviour
     private void Update()
     {
         if (isOpen)
-            transform.position = Vector3.Lerp(transform.position, openPosition, Time.deltaTime * slideSpeed);
+            if (slideIsUpwards)
+            {
+                transform.position = Vector3.Lerp(transform.position, initialPosition + new Vector3(0, slideDistance, 0), Time.deltaTime * slideSpeed);
+            }
+            else
+            {
+                transform.position = Vector3.Lerp(transform.position, initialPosition - new Vector3(0, slideDistance, 0), Time.deltaTime * slideSpeed);
+            }
         else
             transform.position = Vector3.Lerp(transform.position, initialPosition, Time.deltaTime * slideSpeed);
     }
