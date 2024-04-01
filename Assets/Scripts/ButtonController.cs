@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class ButtonController : MonoBehaviour
 {
-    public GameObject door;
     public Sprite unpushedSprite;
     public Sprite pushedSprite;
     public GameObject[] doors; 
@@ -17,16 +16,25 @@ public class ButtonController : MonoBehaviour
 
     private void Start()
     {
-        doorController = door.GetComponent<DoorController>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
 
     private void Update()
     {
-        if (doorController.isOpen)
-            spriteRenderer.sprite = pushedSprite;
-        else
+        if (doors.Length > 0)
+        {
+            if (doors[0].GetComponent<DoorController>().isOpen)
+            {
+                spriteRenderer.sprite = pushedSprite;
+            }
+            else
+            {
+                spriteRenderer.sprite = unpushedSprite;
+            }
+        } else
+        {
             spriteRenderer.sprite = unpushedSprite;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
