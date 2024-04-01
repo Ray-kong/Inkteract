@@ -13,7 +13,7 @@ public class DoorToNextLevel : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (!LevelManager.isGameOver && collision.CompareTag("Player") && Input.GetKey(KeyCode.E))
+        if (!LevelManager.isGameOver && collision.CompareTag("Player") && Input.GetKey(KeyCode.W))
         {
             levelManager.LevelWon();
         }
