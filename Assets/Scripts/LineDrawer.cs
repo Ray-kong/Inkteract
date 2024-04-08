@@ -136,6 +136,7 @@ public class LinesDrawer : MonoBehaviour {
         if ( _currentLine != null ) {
             if ( _currentLine.pointsCount < 2 ) {
                 //If line has one point
+                _linesQueue.Dequeue();
                 Destroy ( _currentLine.gameObject );
             } else {
 
