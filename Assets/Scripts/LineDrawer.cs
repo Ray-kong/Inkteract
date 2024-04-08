@@ -10,6 +10,7 @@ public class LinesDrawer : MonoBehaviour {
     public Gradient gravityLineColor;
     public Gradient antiGravityLineColor;
     public Gradient greenLineColor;
+    public string levelLineColor;
     private Gradient _lineColor;
     public float linePointsMinDistance;
     public float lineWidth;
@@ -25,11 +26,22 @@ public class LinesDrawer : MonoBehaviour {
     
 
     void Start() {
-        _lineColor = gravityLineColor;
+        if (levelLineColor == "blue")
+        {
+            _lineColor = gravityLineColor;
+        } else if (levelLineColor == "green")
+        {
+            _lineColor = greenLineColor;
+        }
+        else
+        {
+            _lineColor = antiGravityLineColor;
+        }
         _cam = Camera.main;
     }
 
     void Update() {
+        /*
         if (Input.GetKeyDown(KeyCode.LeftShift)) {
             if (_lineColor.Equals(gravityLineColor))
             {
@@ -42,6 +54,7 @@ public class LinesDrawer : MonoBehaviour {
                 _lineColor = gravityLineColor;
             }
         }
+        */
         if (Input.GetMouseButtonDown(0)) {
             BeginDraw();
         }

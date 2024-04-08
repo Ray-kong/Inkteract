@@ -165,9 +165,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1f99b3e949008e499b747ef889e30cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialPosition: {x: 0, y: 0, z: 0}
-  openPosition: {x: 5.8, y: 6.32, z: 0}
   slideSpeed: 2
+  slideDistance: 0
+  slideIsUpwards: 1
   isOpen: 0
 --- !u!1 &2696380713121967418
 GameObject:
@@ -267,8 +267,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f201fc0b2ad8aa44da0bf965f3969964, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  door: {fileID: 651985617135836730}
-  pressedPosition: {x: -1.41, y: -2.7, z: 0}
+  unpushedSprite: {fileID: -1566837324, guid: 8c2bd2bd94c864d07b4fbd8de5a2431a, type: 3}
+  pushedSprite: {fileID: 96023896, guid: 8c2bd2bd94c864d07b4fbd8de5a2431a, type: 3}
+  doors:
+  - {fileID: 651985617135836730}
   pushSpeed: 2
 --- !u!61 &1762112592689280516
 BoxCollider2D:

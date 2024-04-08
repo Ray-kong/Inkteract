@@ -459,6 +459,7 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
+  levelLineColor: black
   linePointsMinDistance: 0.2
   lineWidth: 0.2
   maxLineLength: 5
