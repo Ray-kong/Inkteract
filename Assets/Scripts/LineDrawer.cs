@@ -4,16 +4,16 @@ using UnityEngine;
 public class LinesDrawer : MonoBehaviour {
 
     public GameObject linePrefab;
-    public LayerMask cantDrawOverLayer;
-    private int _cantDrawOverLayerIndex;
+    public static bool _isOverNoDraw;
 
     [Space (30f)]
     public Gradient gravityLineColor;
     public Gradient antiGravityLineColor;
+    public Gradient greenLineColor;
     private Gradient _lineColor;
     public float linePointsMinDistance;
     public float lineWidth;
-    
+
     public float maxLineLength = 5.0f;
 
     private readonly Queue<Line> _linesQueue = new Queue<Line>();
@@ -22,16 +22,25 @@ public class LinesDrawer : MonoBehaviour {
     private Line _currentLine;
     private Camera _cam;
     private float _currentLineLength;
+    
 
     void Start() {
         _lineColor = gravityLineColor;
         _cam = Camera.main;
-        _cantDrawOverLayerIndex = LayerMask.NameToLayer("CantDrawOver");
     }
 
     void Update() {
         if (Input.GetKeyDown(KeyCode.LeftShift)) {
-            _lineColor = _lineColor.Equals(gravityLineColor) ? antiGravityLineColor : gravityLineColor;
+            if (_lineColor.Equals(gravityLineColor))
+            {
+                _lineColor = antiGravityLineColor;
+            } else if (_lineColor.Equals(antiGravityLineColor))
+            {
+                _lineColor = greenLineColor;
+            } else
+            {
+                _lineColor = gravityLineColor;
+            }
         }
         if (Input.GetMouseButtonDown(0)) {
             BeginDraw();
@@ -57,6 +66,11 @@ public class LinesDrawer : MonoBehaviour {
         _currentLine.SetPointsMinDistance(linePointsMinDistance);
         _currentLine.SetLineWidth(lineWidth);
 
+        if (_lineColor.Equals(greenLineColor))
+        {
+            _currentLine.gameObject.layer = 2;
+        }
+
         // Check if we need to remove the oldest line
         if (_linesQueue.Count >= maxLines) {
             Line oldestLine = _linesQueue.Dequeue();
@@ -75,32 +89,46 @@ public class LinesDrawer : MonoBehaviour {
             Debug.Log($"Hit: {hit.collider.name}, Layer: {LayerMask.LayerToName(hit.collider.gameObject.layer)}");
             EndDraw();
         } else */ 
-        if (_currentLine.pointsCount > 0) {
-            Vector2 lastPoint = _currentLine.GetLastPoint();
-            float distanceToAdd = Vector2.Distance(lastPoint, mousePosition);
+        if (!_isOverNoDraw)
+        {
+            if (_currentLine.pointsCount > 0)
+            {
+                Vector2 lastPoint = _currentLine.GetLastPoint();
+                float distanceToAdd = Vector2.Distance(lastPoint, mousePosition);
 
-            if (distanceToAdd > linePointsMinDistance) {
-                int pointsToInterpolate = Mathf.FloorToInt(distanceToAdd / linePointsMinDistance);
-                for (int i = 1; i <= pointsToInterpolate; i++) {
-                    Vector2 interpolatedPoint = Vector2.Lerp(lastPoint, mousePosition, (float)i / pointsToInterpolate);
+                if (distanceToAdd > linePointsMinDistance)
+                {
+                    int pointsToInterpolate = Mathf.FloorToInt(distanceToAdd / linePointsMinDistance);
+                    for (int i = 1; i <= pointsToInterpolate; i++)
+                    {
+                        Vector2 interpolatedPoint = Vector2.Lerp(lastPoint, mousePosition, (float)i / pointsToInterpolate);
 
-                    if (_currentLineLength + Vector2.Distance(lastPoint, interpolatedPoint) > maxLineLength) {
-                        return; // Stop adding points if the max length is exceeded
+                        if (_currentLineLength + Vector2.Distance(lastPoint, interpolatedPoint) > maxLineLength)
+                        {
+                            return; // Stop adding points if the max length is exceeded
+                        }
+
+                        // Update the last point and current line length
+                        lastPoint = interpolatedPoint;
+                        _currentLineLength += Vector2.Distance(_currentLine.GetLastPoint(), interpolatedPoint);
+
+                        _currentLine.AddPoint(interpolatedPoint);
                     }
-
-                    // Update the last point and current line length
-                    lastPoint = interpolatedPoint;
-                    _currentLineLength += Vector2.Distance(_currentLine.GetLastPoint(), interpolatedPoint);
-
-                    _currentLine.AddPoint(interpolatedPoint);
                 }
             }
-        } else {
-            // This is the first point, add it directly
-            if (_currentLineLength == 0) {
-                _currentLine.AddPoint(mousePosition);
+            else
+            {
+                // This is the first point, add it directly
+                if (_currentLineLength == 0)
+                {
+                    _currentLine.AddPoint(mousePosition);
+                }
             }
+        } else if (_currentLineLength > 0)
+        {
+            EndDraw();
         }
+        
     }
 
     // End Draw ------------------------------------------------
@@ -110,8 +138,6 @@ public class LinesDrawer : MonoBehaviour {
                 //If line has one point
                 Destroy ( _currentLine.gameObject );
             } else {
-                //Add the line to "CantDrawOver" layer
-                _currentLine.gameObject.layer = _cantDrawOverLayerIndex;
 
                 //Activate Physics on the line
                 if(_lineColor.Equals(gravityLineColor))

@@ -131,6 +131,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 44779044724116330, guid: 002944af05bd33e4289ac90b32264451, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3139480747116710589, guid: 002944af05bd33e4289ac90b32264451, type: 3}
       propertyPath: m_Name
       value: LevelStarters
@@ -1318,7 +1322,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f201fc0b2ad8aa44da0bf965f3969964, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  door: {fileID: 651985617326507236}
   unpushedSprite: {fileID: -1566837324, guid: 8c2bd2bd94c864d07b4fbd8de5a2431a, type: 3}
   pushedSprite: {fileID: 96023896, guid: 8c2bd2bd94c864d07b4fbd8de5a2431a, type: 3}
   doors:

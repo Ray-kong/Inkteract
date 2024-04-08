@@ -10,6 +10,7 @@ TagManager:
   - Box
   - Collectable
   - LevelManager
+  - CantDrawOver
   layers:
   - Default
   - TransparentFX
