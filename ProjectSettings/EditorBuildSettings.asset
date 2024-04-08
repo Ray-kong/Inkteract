@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: b797b188e0406364b93115a5c38f4a7d
+  - enabled: 1
     path: Assets/Scenes/MovementTutorial.unity
     guid: 421a33606718cc440aee1baf5856dc9b
   - enabled: 1
@@ -17,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ButtonBoxTutorial.unity
     guid: 1868e05bdd45f7740aa65cad01a562d9
+  - enabled: 1
+    path: Assets/Scenes/NoDrawZoneTutorial.unity
+    guid: 52dff3e631058d246b934e0f10ccf267
+  - enabled: 1
+    path: Assets/Scenes/GreenInkIntroduction.unity
+    guid: 11d2e365345fb1a4db00edb86acfa10b
   m_configObjects: {}
