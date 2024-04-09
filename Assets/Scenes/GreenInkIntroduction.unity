@@ -2718,6 +2718,66 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: -2.99
       objectReference: {fileID: 0}
+    - target: {fileID: 7202328419008553744, guid: 6d40feb1c03962944948031950082e32, type: 3}
+      propertyPath: m_Loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7202328419008553744, guid: 6d40feb1c03962944948031950082e32, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7202328419008553744, guid: 6d40feb1c03962944948031950082e32, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7202328419008553744, guid: 6d40feb1c03962944948031950082e32, type: 3}
+      propertyPath: m_Parameters.textureMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7202328419008553744, guid: 6d40feb1c03962944948031950082e32, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e300d8dcba989dd4187ff318fad07e34, type: 2}
+    - target: {fileID: 7202328419008553744, guid: 6d40feb1c03962944948031950082e32, type: 3}
+      propertyPath: m_Parameters.colorGradient.atime0
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7202328419008553744, guid: 6d40feb1c03962944948031950082e32, type: 3}
+      propertyPath: m_Parameters.colorGradient.atime1
+      value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 7202328419008553744, guid: 6d40feb1c03962944948031950082e32, type: 3}
+      propertyPath: m_Parameters.colorGradient.atime2
+      value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 7202328419008553744, guid: 6d40feb1c03962944948031950082e32, type: 3}
+      propertyPath: m_Parameters.colorGradient.ctime0
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7202328419008553744, guid: 6d40feb1c03962944948031950082e32, type: 3}
+      propertyPath: m_Parameters.colorGradient.ctime1
+      value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 7202328419008553744, guid: 6d40feb1c03962944948031950082e32, type: 3}
+      propertyPath: m_Parameters.colorGradient.ctime2
+      value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 7202328419008553744, guid: 6d40feb1c03962944948031950082e32, type: 3}
+      propertyPath: m_Parameters.colorGradient.key2.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7202328419008553744, guid: 6d40feb1c03962944948031950082e32, type: 3}
+      propertyPath: m_Parameters.colorGradient.key2.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7202328419008553744, guid: 6d40feb1c03962944948031950082e32, type: 3}
+      propertyPath: m_Parameters.colorGradient.m_NumAlphaKeys
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7202328419008553744, guid: 6d40feb1c03962944948031950082e32, type: 3}
+      propertyPath: m_Parameters.colorGradient.m_NumColorKeys
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8955157406071702039, guid: 6d40feb1c03962944948031950082e32, type: 3}
       propertyPath: m_Name
       value: LaserAndDoor

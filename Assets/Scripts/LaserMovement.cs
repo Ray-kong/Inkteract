@@ -40,7 +40,7 @@ public class LaserMovement : MonoBehaviour
             {
                 if (hit.collider.CompareTag("Player"))
                 {
-                    Destroy(GameObject.FindGameObjectWithTag("Player"));
+                    GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>().TriggerLevelLost();
                 }
                 onSensor = false;
                 foreach (GameObject door in doors)
