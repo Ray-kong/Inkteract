@@ -17,6 +17,12 @@ public class CurstomCursor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Application.isFocused)
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Confined;
+        }
+
         Vector2 mousePosition = Input.mousePosition;
 
         // Convert mouse position to Canvas space
