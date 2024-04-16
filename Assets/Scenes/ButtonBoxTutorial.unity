@@ -186,6 +186,10 @@ PrefabInstance:
       propertyPath: levelLineColor
       value: blue
       objectReference: {fileID: 0}
+    - target: {fileID: 2693187888880283938, guid: 002944af05bd33e4289ac90b32264451, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: ec8263ebd4175ea40b1f0c842bdb3805, type: 2}
     - target: {fileID: 3139480747116710589, guid: 002944af05bd33e4289ac90b32264451, type: 3}
       propertyPath: m_Name
       value: LevelStarters
