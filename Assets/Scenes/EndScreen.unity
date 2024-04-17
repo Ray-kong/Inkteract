@@ -799,7 +799,7 @@ MonoBehaviour:
     Form, Main Programmer (Ink Color Functionality, Color Switch, Movement System,
     Score System, Timer, Level Manager)\r\nRay Kong\r\n\r\nProject Lead, Main Level
     Designer, Sound Effects, Tile Map Implementation, Gameplay Designer, Programmer
-    (No Draw Zones, Menu)\r\nNico Proskauer"
+    (No Draw Zones, Menus)\r\nNico Proskauer"
 --- !u!222 &1310892514
 CanvasRenderer:
   m_ObjectHideFlags: 0

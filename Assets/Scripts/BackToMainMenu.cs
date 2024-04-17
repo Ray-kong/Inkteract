@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class BackToMainMenu : MonoBehaviour
 {
+    private void Start()
+    {
+        Cursor.visible = true;
+    }
     public void LoadNextLevel()
     {
         SceneManager.LoadScene(0);

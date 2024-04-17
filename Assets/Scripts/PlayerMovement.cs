@@ -43,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 _body.velocity = new Vector2(_body.velocity.x, jumpForce);
                 _canJump = false;
-                //AudioSource.PlayClipAtPoint(jumpSFX, Camera.main.transform.position);
+                AudioSource.PlayClipAtPoint(jumpSFX, Camera.main.transform.position, 0.1f);
             }
         }
     }
@@ -54,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (!_canJump)
             {
-                //AudioSource.PlayClipAtPoint(landingSFX, Camera.main.transform.position);
+                AudioSource.PlayClipAtPoint(landingSFX, Camera.main.transform.position, 0.05f);
             }
             _canJump = true;
         }

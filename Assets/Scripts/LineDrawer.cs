@@ -23,6 +23,7 @@ public class LinesDrawer : MonoBehaviour {
     private Line _currentLine;
     private Camera _cam;
     private float _currentLineLength;
+    private AudioSource audioSource;
     
 
     void Start() {
@@ -38,6 +39,16 @@ public class LinesDrawer : MonoBehaviour {
             _lineColor = antiGravityLineColor;
         }
         _cam = Camera.main;
+
+        audioSource = GetComponent<AudioSource>();
+
+        if (audioSource.clip != null)
+        {
+            // Set the time to a random value between 0 and the length of the audio clip
+            audioSource.time = Random.Range(0, audioSource.clip.length);
+            // Enable looping
+            audioSource.loop = true;
+        }
     }
 
     void Update() {
@@ -57,6 +68,7 @@ public class LinesDrawer : MonoBehaviour {
         */
         if (Input.GetMouseButtonDown(0)) {
             BeginDraw();
+            audioSource.Play();
         }
 
         if (_currentLine != null) {
@@ -159,6 +171,8 @@ public class LinesDrawer : MonoBehaviour {
 
                 _currentLine = null;
             }
+            audioSource.Stop();
+            audioSource.time = Random.Range(0, audioSource.clip.length);
         }
     }
     
