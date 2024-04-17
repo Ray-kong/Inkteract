@@ -9,20 +9,12 @@ public class CurstomCursor : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Confined;
         canvasRect = GetComponentInParent<Canvas>().GetComponent<RectTransform>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Application.isFocused)
-        {
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Confined;
-        }
-
         Vector2 mousePosition = Input.mousePosition;
 
         // Convert mouse position to Canvas space

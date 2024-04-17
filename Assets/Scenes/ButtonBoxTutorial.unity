@@ -242,6 +242,10 @@ PrefabInstance:
       propertyPath: nextLevel
       value: NoDrawZoneTutorial
       objectReference: {fileID: 0}
+    - target: {fileID: 6342835663968187200, guid: 002944af05bd33e4289ac90b32264451, type: 3}
+      propertyPath: levelDuration
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 6717709653681236630, guid: 002944af05bd33e4289ac90b32264451, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10.41

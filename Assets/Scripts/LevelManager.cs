@@ -24,6 +24,8 @@ public class LevelManager : MonoBehaviour
         _score = 0;
         SetTimerText();
         scoreText.text = "Score: 0"; // Initialize score text
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
 
         if (!player)
         {
@@ -33,6 +35,11 @@ public class LevelManager : MonoBehaviour
 
     void Update()
     {
+        if (Application.isFocused)
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Confined;
+        }
         if (!isGameOver)
         {
             UpdateTimer();
@@ -96,7 +103,7 @@ public class LevelManager : MonoBehaviour
         if (nextLevel.Equals("Level 4")) {
             return;
         }
-        SceneManager.LoadScene(nextLevel);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     void LoadCurrentLevel()
